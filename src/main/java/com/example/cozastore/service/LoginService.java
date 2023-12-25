@@ -15,9 +15,9 @@ public class LoginService implements LoginServiceImp {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public boolean checkLogin(String email,String password){
+    public UserEntity checkLogin(String email,String password){
         UserEntity user=userRepository.findByEmail(email);
 
-        return user!=null && passwordEncoder.matches(password,user.getPassword());
+        return user!=null && passwordEncoder.matches(password,user.getPassword())?user:null;
     }
 }

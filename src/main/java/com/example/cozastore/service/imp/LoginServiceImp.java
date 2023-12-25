@@ -1,5 +1,7 @@
 package com.example.cozastore.service.imp;
 
+import com.example.cozastore.entity.UserEntity;
+
 public interface LoginServiceImp {
-    boolean checkLogin(String email,String password);
+    UserEntity checkLogin(String email, String password);
 }
