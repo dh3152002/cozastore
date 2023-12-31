@@ -1,10 +1,13 @@
 package com.example.cozastore.controller;
 
 import com.example.cozastore.jwt.JwtHelper;
+import com.example.cozastore.payload.response.BaseResponse;
 import com.google.gson.Gson;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Encoders;
 import io.jsonwebtoken.security.Keys;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +29,8 @@ public class LoginController {
 
     private Gson gson=new Gson();
 
+    private Logger logger= LoggerFactory.getLogger(LoginController.class);
+
     @GetMapping("")
     public ResponseEntity<?> login(){
         // Tạo key mã hóa cho token
@@ -45,6 +50,11 @@ public class LoginController {
         String json=gson.toJson(authentication.getAuthorities());
 
         String token=jwtHelper.generateToken(json);
+
+        BaseResponse baseResponse=new BaseResponse();
+        baseResponse.setData(token);
+
+        logger.info("Response: "+baseResponse);
 
         return new ResponseEntity<>(token,HttpStatus.OK);
     }
