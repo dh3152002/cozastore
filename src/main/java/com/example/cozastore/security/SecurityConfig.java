@@ -44,6 +44,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/login/**").permitAll()
                 .requestMatchers(HttpMethod.POST,"/product").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET,"/product").permitAll()
                 .anyRequest().authenticated()
                 .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

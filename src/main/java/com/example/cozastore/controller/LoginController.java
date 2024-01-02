@@ -57,6 +57,6 @@ public class LoginController {
 
         logger.info("Response: "+baseResponse);
 
-        return new ResponseEntity<>(token,HttpStatus.OK);
+        return new ResponseEntity<>(baseResponse,HttpStatus.OK);
     }
 }
